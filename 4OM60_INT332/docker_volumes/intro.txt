@@ -1,0 +1,87 @@
+Docker volume
+A docker volume is a persistent storeage mechanism  used by containers to store data outside the container's .
+
+type of storage in docker
+volume - database , production , managed by docker
+Bind mounts - development
+tmpfs - secrets, cache
+
+basic cmd
+docker volume create<volume name>
+docker volume ls
+docker volume inspect mydata
+docker run -d -v <volumename>:<path where to store in image> --name <container name> <image name>
+
+
+example
+docker volume create mydata
+docker volume ls
+docker volume inspect mydata
+docker run -dit -v mydata:/app/data --name cont1 ubuntu ( -v means attaching the volume to container)
+docker exec -it cont1 bash
+echo "Hello Docker Volume" > /app/data/file1.txt
+cat /app/data/file1.txt
+exit
+docker rm -f cont1
+docker run -it iv mydata:/app/data ubuntu bash
+cat /app/data/file1.txt
+docker volume rm mydata
+docker prune volume
+
+
+
+
+PS C:\Users\PRINCE KUMAR> docker volume create mydata
+mydata
+
+PS C:\Users\PRINCE KUMAR> docker volume ls
+DRIVER    VOLUME NAME
+local     1f023862d65f173cc702c801e87fbe394b9e1907a746ccea3145b4e3b041a06e
+local     2e90774f8b507c1c30ff49a173c02d241987c29340ef71d3519bb7f49dc8cebe
+local     3ed507087e060c2672b04539e57bde15f3907bd07cfbd8f7b782d20810dfe4f6
+local     6ec0b4c1fe5f5f83a1d09fe93446ae8745aa6533b322c759433193c517eee569
+local     83bb13475b8187e2aa1e80d0220a38f4316305e84fac5b49f1e68151b7733715
+local     881b4cb53ab86c46e9d4a6b506cfbcf5cf0672d2ffe6cd01ca9d3904bf0f0248
+local     99237594f903e2e26188d0c221d9a7683a2f0c0a2597e7f2a685f43cea041826
+local     a302d0b90531f8e7fe54c13166d2d2898f8408a052eba4c3b6c4ae35c625fabb
+local     d8dd2b0092d6349f3ee66811ae306d4c5cde5fa50b341d1d13ae683de41055b1
+local     e72bcc7cac9b49d93fe6c6206c7bee779a14f4b649d1c898683c95fc14369187
+local     ef3b846118f4dd3338262319bc4fc4555746f8beeea00c9f10c444ca84e7302a
+local     mydata
+
+PS C:\Users\PRINCE KUMAR> docker volume inspect mydata
+[
+    {
+        "CreatedAt": "2026-04-01T06:58:04Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/mydata/_data",
+        "Name": "mydata",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+
+PS C:\Users\PRINCE KUMAR> docker run -dit -v mydata:/app/data --name cont1 ubuntu
+589657ce28d08bca1741ce9e1215c44de79524cded9749c358bc2f6edebe8fa6
+
+PS C:\Users\PRINCE KUMAR> docker exec -it cont1 bash
+
+root@589657ce28d0:/# echo "Hello Docker Volume"> /app/data/file1.txt
+
+root@589657ce28d0:/# cat /app/data/file1.txt
+Hello Docker Volume
+
+
+root@67e2235036da:/# exit
+exit
+
+PS C:\Users\PRINCE KUMAR> docker rm -f 67e2235036da
+67e2235036da
+PS C:\Users\PRINCE KUMAR> docker volume rm mydata
+mydata
+
+PS C:\Users\PRINCE KUMAR> docker volume prune
+WARNING! This will remove anonymous local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Total reclaimed space: 0B

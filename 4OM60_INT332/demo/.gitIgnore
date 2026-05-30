@@ -1,0 +1,81 @@
+# Dependencies
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage / test output
+coverage/
+.nyc_output/
+
+# Build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+.cache/
+.parcel-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Package manager lockfiles (choose based on your team preference)
+# Keep ONE of these tracked if you want reproducible installs
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Optional: local config
+.local/
+*.local
+
+# Docker
+.dockerignore
+
+# Temporary files
+tmp/
+temp/
+
+# PM2
+.pm2/
+
+# ESLint cache
+.eslintcache
+
+# Optional: Prisma / DB generated files
+prisma/dev.db
+prisma/dev.db-journal
+
+# Optional: uploads or generated assets
+uploads/
+public/uploads/

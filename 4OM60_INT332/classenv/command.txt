@@ -1,0 +1,43 @@
+docker build -t myapp:v1 .
+docker run myapp:v1 
+
+docker run -e MY_VAR=value httpd env
+output
+PATH=/usr/local/apache2/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=39dbf0b605d0
+MY_VAR=value
+HTTPD_PREFIX=/usr/local/apache2
+HTTPD_VERSION=2.4.66
+HTTPD_SHA256=94d7ff2b42acbb828e870ba29e4cbad48e558a79c623ad3596e4116efcfea25a
+HTTPD_PATCHES=
+HOME=/root
+
+
+docker run -e APP_ENV=prodcution -e APP_VERSION=1.0 nginx
+PS C:\Users\PRINCE KUMAR> docker exec -it c7105cd20128 bash
+root@c7105cd20128:/# echo $APP_ENV
+production
+root@c7105cd20128:/# echo $APP_VERSION
+1.0
+root@c7105cd20128:/# exit
+exit
+
+
+docker run -it -e MY_NAME=Prince ubuntu bash
+output
+root@ff3ea042466d:/# ls
+bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media  opt  root  sbin  sys  usr
+root@ff3ea042466d:/# exit
+exit
+
+//create the container of mysql image and also set environment variable
+docker run -d -e MYSQL_ROOT_PASSWORD=root123 -e MYSQL_DATABASE=colege -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 mysql:8
+
+//access mysql cli
+docker exec -it mymysql mysql -u root -p  //root user
+docker exec -it mymysql mysql -u admin -p  //admin
+
+//access the database using browser from specific port .
+docker run -d --name mymysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root123 -e MYSQL_DATABASE=college -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 mysql:8
+

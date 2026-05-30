@@ -1,0 +1,25 @@
+1.update the ubuntu container, install apache and php ,then push updated on to docker hub
+
+2.Compare the size of base image and updated image after commit
+
+
+3. 
+mkdir docker-demo
+cd docker-demo
+Notepad dockerfile
+
+
+4.Create one folder mkdir docker_python
+cd 
+code 
+
+from flask import flask
+app=Flask(_name_)
+@app.route("/")
+def home():
+    return "Hello from Docker"
+
+app.run(host="0.0.0.0", port=5000)
+
+
+dockerfile

@@ -1,0 +1,2 @@
+docker build -t myapp:v1 .
+docker run myapp:v1 

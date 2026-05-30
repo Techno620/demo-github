@@ -1,0 +1,11 @@
+Run ubuntu container
+pass -e college=cse
+show echo $college
+stop container then check what happened
+
+
+
+
+1.Run a Docker container named "DB-app" based on the mongodb image and expose port 80 on the host to port 8082 on the container?
+docker run -d --name DB-app -p 80:8082 mongodb
+

@@ -1,0 +1,89 @@
+✔ Build a Docker image
+✔ Push image to GHCR
+✔ Pull image from GHCR
+✔ Understand authentication
+
+Create GitHub Personal Access Token (PAT)
+Step 1 → Open
+Go to:
+GitHub → Settings → Developer Settings → Personal Access Tokens
+Direct path: https://github.com/settings/tokens
+
+Step 2 → Generate Token
+Choose:
+Classic Token
+Enable permissions:
+✔ write:packages
+✔ read:packages
+✔ delete:packages (optional)
+
+
+Step 3 → Copy Token
+Copy immediately.
+You will NOT see it again.
+Tip:
+PAT = Password for Docker, not GitHub password
+ Create Simple Demo Projec
+Create Folder
+mkdir ghcr-demo
+cd ghcr-demo
+Create Dockerfile
+Create file:
+
+
+Dockerfile
+Paste This (Safest Beginner Image)
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+
+
+Create index.html
+Create file:
+index.html
+Paste:
+<h1>GHCR Demo Success </h1>
+ Build Docker Image
+Now build locally.
+Command
+Replace yourusername
+
+docker build -t ghcr.io/yourusername/ghcr-demo .
+Example:
+docker build -t ghcr.io/harpreetkaur/ghcr-demo .
+
+Login to GHCR
+Critical authentication step.
+Command
+docker login ghcr.io
+Enter:
+✔ Username → GitHub username
+✔ Password → PAT token
+NOT GitHub password
+
+
+Push Image to GHCR
+Command
+docker push ghcr.io/yourusername/ghcr-demo
+What Happens Now?
+Local image → Uploaded → GitHub registry
+ Verify on GitHub
+Go to:
+GitHub → Profile → Packages
+You will see:
+✔ Image name
+✔ Visibility
+✔ Version
+ Pull Image Back (Proof of Success)
+Delete local image
+Remove Image
+docker rmi ghcr.io/yourusername/ghcr-demo
+
+
+Pull Again
+docker pull ghcr.io/yourusername/ghcr-demo
+Run Container (Final Visual Proof)
+Command
+
+docker run -p 8080:80 ghcr.io/yourusername/ghcr-demo
+Open browser:
+http://localhost:8080

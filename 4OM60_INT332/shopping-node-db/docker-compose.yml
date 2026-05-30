@@ -1,0 +1,30 @@
+services:
+  db:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shopdb
+      MYSQL_USER: shopuser
+      MYSQL_PASSWORD: shoppass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: ./backend
+    container_name: node_app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: shopuser
+      DB_PASSWORD: shoppass
+      DB_NAME: shopdb
+
+volumes:
+  mysql_data:

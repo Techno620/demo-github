@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongo_db
+    restart: always
+    ports:
+      - "${MONGO_PORT}:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app_network
+
+  backend:
+    build: ./backend
+    container_name: cpp_backend
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      APP_PORT: ${APP_PORT}
+      MONGO_URI: ${MONGO_URI}
+    networks:
+      - app_network
+
+volumes:
+  mongo_data:
+
+networks:
+  app_network:
+    driver: bridge

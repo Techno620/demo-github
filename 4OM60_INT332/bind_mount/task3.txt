@@ -1,0 +1,51 @@
+PS C:\Users\PRINCE KUMAR> docker volume create studentdata
+studentdata
+
+PS C:\Users\PRINCE KUMAR> docker run -it -v studentdata/student ubuntu bash
+root@a029d6b85d14:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  studentdata  sys  tmp  usr  var
+root@a029d6b85d14:/# exit
+exit
+
+PS C:\Users\PRINCE KUMAR> docker run -it -v studentdata:/student ubuntu bash
+root@246b0e17ec85:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  student  sys  tmp  usr  var
+root@246b0e17ec85:/# cd student
+root@246b0e17ec85:/student# ls
+root@246b0e17ec85:/student# cat>>abc.txt
+Hello everyone
+root@246b0e17ec85:/student# cat abc.txt
+Hello everyone
+root@246b0e17ec85:/student# cd..
+bash: cd..: command not found
+root@246b0e17ec85:/student# cd ..
+root@246b0e17ec85:/# exit
+exit
+
+
+##share volume between multiple container 
+
+PS C:\Users\PRINCE KUMAR> docker run -it -v studentdata:/student ubuntu bash
+root@52c25b072350:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  student  sys  tmp  usr  var
+root@52c25b072350:/# cd student
+root@52c25b072350:/student# ls
+abc.txt
+root@52c25b072350:/student# cat abc.txt
+Hello everyone
+root@52c25b072350:/student# ls
+abc.txt  demo.txt
+root@52c25b072350:/student#
+
+
+PS C:\Users\PRINCE KUMAR> docker run -it -v studentdata:/demo ubuntu bash
+root@bed43608d61a:/# ls
+bin  boot  demo  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@bed43608d61a:/# cd demo
+root@bed43608d61a:/demo# cat>>demo.txt
+welcome to demo file
+root@bed43608d61a:/demo# ls
+abc.txt  demo.txt
+root@bed43608d61a:/demo#
+
+

@@ -1,0 +1,51 @@
+Run container on same network
+
+docker run -d --name app --network mynet nginx
+docker run -d --name db --network mynet mysql
+docker exec -it c1 ping c2
+
+command
+
+docker network create mynet
+docker run -dit --name c1 --network mynet busybox
+docker run -dit --name c2 --network mynet busybox
+
+
+
+example
+
+PS C:\Users\PRINCE KUMAR> docker network create mynet
+a77bac91144054d03a51ca278078d29babe4627cc1673084b97c87629c8e840c
+
+
+PS C:\Users\PRINCE KUMAR> docker run -dit --name c1 --network mynet busybox
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+481282afbc43: Pull complete
+aecba0016ef2: Download complete
+Digest: sha256:1487d0af5f52b4ba31c7e465126ee2123fe3f2305d638e7827681e7cf6c83d5e
+Status: Downloaded newer image for busybox:latest
+6e2c329ea4abed79840dc52d35edb612830c486e71f0652f0b2dd4c9457875fa
+
+
+PS C:\Users\PRINCE KUMAR> docker run -dit --name c2 --network mynet busybox
+e83e64e234e593c0fc4ff5eef174c403ce220776fdba7af6db3c23617a04103d
+
+## use ping command to check connectivity between two container 
+PS C:\Users\PRINCE KUMAR> docker exec -it c1 ping c2
+PING c2 (172.19.0.3): 56 data bytes
+64 bytes from 172.19.0.3: seq=0 ttl=64 time=1.027 ms
+64 bytes from 172.19.0.3: seq=1 ttl=64 time=0.240 ms
+64 bytes from 172.19.0.3: seq=27 ttl=64 time=0.238 ms
+64 bytes from 172.19.0.3: seq=28 ttl=64 time=0.184 ms
+--- c2 ping statistics ---
+49 packets transmitted, 49 packets received, 0% packet loss
+round-trip min/avg/max = 0.164/0.237/1.027 ms
+
+## assign the host network to container
+PS C:\Users\PRINCE KUMAR> docker run -d --network host nginx
+fc5a651ab9ea3d95b09cfe25362ef61897d41cdbe1e8fc95e85c61fa99abbcde
+
+PS C:\Users\PRINCE KUMAR> docker run -d -p 8080:80 nginx
+9318321722ac3542247ea62193d7e5ae600a50e4eea5b82152ad608a027e283e
+PS C:\Users\PRINCE KUMAR>

@@ -1,0 +1,23 @@
+Bind Mount - Managed by User , Stored in host path, less secure
+volume - Managed by docker, stored in docker area, safer
+
+docker run --mounttype=<type>, source=<src>, target=<dest> image
+
+type- volume, bind, tmpfs
+source- volume name or host path
+target- path inside container
+readonly- mount as readonly
+
+
+#basic of docker 
+if you make any change in local imgae ,then it will doesn't original image
+
+PS D:\B.Tech-6 semester\Devops Virtualization\docker\cow-demo> docker build -t cowdemo:v1 .
+
+PS D:\B.Tech-6 semester\Devops Virtualization\docker\cow-demo> docker run -it --name cc1 cowdemo:v1
+/app # cat>>message.txt
+Hello to dockerfile
+/app # cat message.txt
+original docker fileHello to dockerfile
+/app # exit
+PS D:\B.Tech-6 semester\Devops Virtualization\docker\cow-demo>

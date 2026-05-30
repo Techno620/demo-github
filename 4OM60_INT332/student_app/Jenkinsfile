@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME = "Registration"
+    }
+
+    stages {
+
+        stage('Compile Java Program') {
+            steps {
+                sh 'javac Registration.java'
+            }
+        }
+
+        stage('Run Java Program') {
+            steps {
+                sh 'java Registration'
+            }
+        }
+    }
+
+    post {
+
+        success {
+            echo 'Java application executed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
+        }
+
+        always {
+            cleanWs()
+        }
+    }
+}

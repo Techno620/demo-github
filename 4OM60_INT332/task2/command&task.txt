@@ -1,0 +1,27 @@
+Task 1 : You have to start a new container using the nginx image while setting an environment variable ENV_MODE=production. Write the docker run command to achieve this.
+
+Command
+PS C:\Users\PRINCE KUMAR> docker run -it -e ENV_MODE=production httpd bash
+root@cd8aca92caef:/usr/local/apache2# echo $ENV_MODE
+production
+
+
+
+Task 2: You have have a running container named my_app but it's not behaving as expected. You want to check its logs to debug any error. Write to check its logs to debug any errors . Write the command to view its logs and follow new log entries in real-time.
+
+Command
+PS C:\Users\PRINCE KUMAR> docker run -it --name my-app ubuntu bash
+root@bb91408e2f2d:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@bb91408e2f2d:/# touch abc.txt
+root@bb91408e2f2d:/#
+
+
+logs file in real time using follow mode i.e it will load the logs in real time
+PS C:\Users\PRINCE KUMAR> docker logs -f my-app
+root@bb91408e2f2d:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@bb91408e2f2d:/# touch abc.txt
+
+
+
