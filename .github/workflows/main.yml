@@ -1,4 +1,4 @@
-name: demo ci/cd without dockerfile
+name: demo ci/cd pipeline without dockerfile
 
 on: 
   push:
