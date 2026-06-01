@@ -31,7 +31,7 @@ jobs:
       - name: install npm
         run: npm ci
 
-      - name: Run application
-        run: node index.js
+      - name: Test node
+        run: npm test
     
     
