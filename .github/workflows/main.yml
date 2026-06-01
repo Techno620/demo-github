@@ -1,0 +1,39 @@
+name: demo ci/cd without dockerfile
+
+on: 
+  push:
+    branches:
+      - main
+      - devops
+    paths: 
+      - '4OM60_INT332/demo/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 4OM60_INT332/demo
+
+    steps:
+      - name: checkout the repo
+        uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 4OM60_INT332/demo/package-lock.json
+
+      - name: install npm
+        run: npm ci
+
+      - name: Run application
+        run: node index.js
+    
+    
